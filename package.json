@@ -1,0 +1,18 @@
+{
+  "name": "rick_y_morty",
+  "version": "1.0.0",
+  "description": "Pagina web, con peticiones a la api de rick and morty.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Javascript",
+    "APIs",
+    "Html",
+    "CSS",
+    "Bootstrap"
+  ],
+  "author": "Javier Gutierrez",
+  "license": "MIT"
+}
