@@ -16,4 +16,4 @@ fetch(API)
   });
   HTMLResponse.appendChild(UL)
 })
-  // .catch(err => console.err(err));
+.catch( () => {console.log(Response.error);});
