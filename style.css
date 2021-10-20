@@ -4,4 +4,18 @@ html {
 
 .wrapper {
   background-color: gray;
+  width: 300px;
+  height: 100px;
+}
+
+.card {
+  margin: 1rem;
+  padding: 0;
+}
+.card h5 {
+  font-size: 2rem;
+}
+
+.card p {
+  font-size: 1.4rem;
 }

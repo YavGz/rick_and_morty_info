@@ -26,7 +26,7 @@ const registerImage = (imagen) => {
 
 // ----- lazy loading
 
-const API = "https://rickandmortyapi.com/api/character/";
+let API = "https://rickandmortyapi.com/api/character/";
 
 const appNode = document.querySelector('#app')
 
@@ -36,17 +36,36 @@ fetch(API)
 .then((response) => response.json())
 .then((response) => {
   response.results.forEach( (result) => {
-    const container = document.createElement('div')
     const wrapper = document.createElement('div')
-    wrapper.className = 'wrapper'
-    const divIMG = document.createElement('li')
+    wrapper.className = 'wrapper,col-12,col-md-6'
+    
+    const container = document.createElement('div')
+    container.className = 'card col-12 col-md-6'
+    container.style = 'width: 30rem'
 
-    elem.appendChild(
-      document.createTextNode(`ID: ${result.id}  Nombre: ${result.name}`)
-    );
-    container.appendChild(wrapper)
+    const img = document.createElement('img')
+    img.className = 'card-img-top'
+    img.alt = `imagen del personaje ${result.name}`
+    img.dataset.src = `${result.image}`
+    registerImage(img)
+    
+    const content = document.createElement('div')
+    content.className = 'card-body'
+    
+    const title = document.createElement('h5')
+    title.className = 'card-title'
+    title.appendChild(document.createTextNode(`${result.name}`))
 
+    const status = document.createElement('p')
+    status.className = 'card-text'
+    status.appendChild(document.createTextNode(`Estatus: ${result.status}`))
+    
+
+    
+    // wrapper.appendChild(container)
+    content.append(title, status)
+    container.append(img, content)
     appNode.appendChild(container)
   });
 })
-.catch( () => {console.log(Response.error);});
+// .catch( () => {console.log(Response.error)})
