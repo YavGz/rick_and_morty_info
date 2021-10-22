@@ -36,8 +36,6 @@ fetch(API)
 .then((response) => response.json())
 .then((response) => {
   response.results.forEach( (result) => {
-    const wrapper = document.createElement('div')
-    wrapper.className = 'wrapper,col-12,col-md-6'
     
     const container = document.createElement('div')
     container.className = 'card col-12 col-md-6'
@@ -58,7 +56,13 @@ fetch(API)
 
     const status = document.createElement('p')
     status.className = 'card-text'
-    status.appendChild(document.createTextNode(`Estatus: ${result.status}`))
+    if (result.status == 'Alive') {
+        status.appendChild(document.createTextNode(`🟢 ${result.status} - ${result.species}`))
+      } else if (result.status == 'Dead') {
+        status.appendChild(document.createTextNode(`🔴 ${result.status} - ${result.species}`))
+      } else {
+      status.appendChild(document.createTextNode(`⚫ ${result.status} - ${result.species}`))        
+    }
     
 
     
@@ -68,4 +72,4 @@ fetch(API)
     appNode.appendChild(container)
   });
 })
-// .catch( () => {console.log(Response.error)})
+.catch( () => {console.log(Response.error)})
