@@ -16,6 +16,10 @@ h1 {
   color: #fff;
 }
 
+#pages {
+  margin: 0.5rem 0;
+  height: auto;
+}
 .wrapper {
   background-color: gray;
   width: 300px;
@@ -28,16 +32,45 @@ h1 {
   border: none;
   border-radius: 0.5rem;
   background-color: rgb(190, 190, 190);
-  box-shadow: rgb(20, 20, 20);
 }
-.card img{
+.card-body {
+  padding: 0.8rem;
+}
+.card img {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
 .card h5 {
+  margin-bottom: 0.8rem;
   font-size: 2rem;
 }
 
-.card p {
+.card-text {
   font-size: 1.4rem;
+  margin-bottom: 0.1rem;
+}
+
+.pageButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.pageButtons div{
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  align-content: center;
+  margin: 0.5rem;
+  width: 2.6rem;
+  height: 3.6rem;
+  border-radius: 0.5rem;
+  background-color: #504f4f;
+}
+.pageButtons p {
+  margin: 0;  
+}
+footer {
+  margin-top: 0.1rem;
+  background-color: #181818;
+  height: 2rem;
 }

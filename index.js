@@ -23,14 +23,19 @@ const registerImage = (imagen) => {
   //intersectationObservador -> observer(imagen)
   observer.observe(imagen);
 }
-
 // ----- lazy loading
 
-let API = "https://rickandmortyapi.com/api/character/";
+let numberPage = 2;
+
+let API = `https://rickandmortyapi.com/api/character/?page=${numberPage}`;
 
 const appNode = document.querySelector('#app')
 
+const pages = document.querySelector('#pages')
+
 const UL = document.createElement('ul')
+
+let nextPage;
 
 fetch(API)
 .then((response) => response.json())
@@ -57,19 +62,56 @@ fetch(API)
     const status = document.createElement('p')
     status.className = 'card-text'
     if (result.status == 'Alive') {
-        status.appendChild(document.createTextNode(`🟢 ${result.status} - ${result.species}`))
+        status.appendChild(document.createTextNode(`${result.species} - ${result.status} 🟢`))
       } else if (result.status == 'Dead') {
-        status.appendChild(document.createTextNode(`🔴 ${result.status} - ${result.species}`))
+        status.appendChild(document.createTextNode(`${result.species} - ${result.status} 🔴`))
       } else {
-      status.appendChild(document.createTextNode(`⚫ ${result.status} - ${result.species}`))        
+      status.appendChild(document.createTextNode(`${result.species} - ${result.status} ⚫`))        
     }
+
+    const gender = document.createElement('p')
+    gender.className = 'card-text'
+    gender.appendChild(document.createTextNode(`Gender: ${result.gender}`))
     
+    const dimension = document.createElement('p')
+    dimension.className = 'card-text'
+    dimension.appendChild(document.createTextNode(`Dimension: ${result.location.name}`))
 
     
     // wrapper.appendChild(container)
-    content.append(title, status)
+    content.append(title, status, gender, dimension)
     container.append(img, content)
     appNode.appendChild(container)
   });
 })
 .catch( () => {console.log(Response.error)})
+
+fetch(API)
+  .then((response) => response.json())
+  .then( (response) => {
+
+    let containerPage = document.createElement('div');
+    containerPage.className = 'pageButtons'
+    let nextPage = document.createElement('div');
+    let pNext = document.createElement('p')
+    pNext.appendChild(document.createTextNode('>'))
+    nextPage.appendChild(pNext)
+    nextPage.src = response.info.next
+    let prevPage = document.createElement('div');
+    prevPage.appendChild(document.createTextNode(' < '))
+    prevPage.src = response.info.prev
+
+    if ( response.info.next !== null && response.info.prev == null ) {
+      containerPage.appendChild(nextPage)
+    } else if (response.info.next == null && response.info.prev !== null) {
+      containerPage.appendChild(prevPage)
+    } else {
+      containerPage.append(prevPage, nextPage)
+    }
+
+    pages.appendChild(containerPage)
+  })
+
+const changePage = () => {
+  
+}
