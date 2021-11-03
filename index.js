@@ -74,24 +74,30 @@ function addButtons () {
   .then((response) => response.json())
   .then( (response) => {
 
-    let containerPage = document.createElement('div');
+    const containerPage = document.createElement('div');
     containerPage.className = 'pageButtons'
-    let nextPage = document.createElement('div');
+    const nextPage = document.createElement('div');
     nextPage.className = 'nextPage'
     nextPage.appendChild(document.createTextNode('>'))
     nextPage.src = response.info.next
-    
-    let prevPage = document.createElement('div');
+
+    let numPage = document.createElement('div')
+    numPage.className = 'numPage'
+    let pNum = document.createElement('p')
+    pNum.appendChild(document.createTextNode(`${numberPage}/${response.info.pages}`))
+    numPage.appendChild(pNum)
+
+    const prevPage = document.createElement('div');
     prevPage.className = 'prevPage'
     prevPage.appendChild(document.createTextNode(' < '))
     prevPage.src = response.info.prev
 
     if ( response.info.next !== null && response.info.prev == null ) {
-      containerPage.appendChild(nextPage)
+      containerPage.append(numPage ,nextPage)
     } else if (response.info.next == null && response.info.prev !== null) {
-      containerPage.appendChild(prevPage)
+      containerPage.append(prevPage, numPage)
     } else {
-      containerPage.append(prevPage, nextPage)
+      containerPage.append(prevPage, numPage, nextPage)
     }
 
     pages.appendChild(containerPage)
@@ -101,10 +107,10 @@ function addButtons () {
 pages.addEventListener('click', (event) => {
   console.log(` !!!saludos desde ${event.target.className}`);
   if (event.target.className === 'nextPage') {
-    console.log(`saludos desde ${event.target.className}`);
+    // console.log(`saludos desde ${event.target.className}`);
     changeNext();
   } else if (event.target.className === 'prevPage'){
-    console.log(`saludos desde ${event.target.className}`);
+    // console.log(`saludos desde ${event.target.className}`);
     changePrev();
   }
 })
