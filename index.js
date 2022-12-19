@@ -58,6 +58,7 @@ function fetchAPI () {
       
       content.append(title, status, gender, dimension)
       container.append(img, content)
+      console.log("repintando");
       appNode.appendChild(container)
     });
   })
@@ -106,7 +107,7 @@ function addButtons () {
 }
 
 document.addEventListener('click', (event) => {
-  console.log(` !!!saludos desde ${event.target.className}`);
+  // console.log(` !!!saludos desde ${event.target.className}`);
   if (event.target.className === 'nextPage') {
     changeNext();
   } else if (event.target.className === 'prevPage'){
